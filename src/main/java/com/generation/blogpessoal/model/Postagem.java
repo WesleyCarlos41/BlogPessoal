@@ -6,40 +6,46 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 //transforma o objeto criando uma tabela no banco de dados
 @Entity
 
 //Dá um nomr para a tabela do banco de dados
-@Table(name= "tb_postagem")
+@Table(name = "tb_postagem")
 public class Postagem {
-	
+
 	// Define a coluna de id como chave primaria
 	@Id
-	
+
 	// equivalente ao Auto_inclement no mysql
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
-	
+
 	@NotNull
-	@Size(min = 5, max = 100, message="O campo deveve ter no minino 5 caracteres e no maximo 100 caracteres")
+	@Size(min = 5, max = 100, message = "O campo deveve ter no minino 5 caracteres e no maximo 100 caracteres")
 	public String titulo;
-	
+
 	@NotNull
 	public String texto;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date data = new java.sql.Date(System.currentTimeMillis());
+
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
 
 	public Long getId() {
 		return id;
 	}
-
 
 	public Date getData() {
 		return data;
@@ -67,5 +73,13 @@ public class Postagem {
 
 	public void setTexto(String texto) {
 		this.texto = texto;
+	}
+
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
 	}
 }
