@@ -36,6 +36,8 @@ public class SwaggerConfig {
 				.externalDocs(new ExternalDocumentation()
 					.description("Meu linkedin")
 					.url("https://www.linkedin.com/in/wesley-carlos-533926237/"));
+        			
+        		
 	}
 	@Bean
 	public OpenApiCustomiser customerGlobalHeaderOpenApiCustomiser() {

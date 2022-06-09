@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,17 +27,16 @@ public class Postagem {
 
 	// equivalente ao Auto_inclement no mysql
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
+	private Long id;
 
 	@NotNull
-	@Size(min = 5, max = 100, message = "O campo deveve ter no minino 5 caracteres e no maximo 100 caracteres")
-	public String titulo;
+	private String titulo;
 
 	@NotNull
-	public String texto;
+	private String texto;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	public Date data = new java.sql.Date(System.currentTimeMillis());
+	private Date data = new java.sql.Date(System.currentTimeMillis());
 
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
@@ -47,17 +46,8 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")
 	private Usuario usuario;
 
-
 	public Long getId() {
 		return id;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
 	}
 
 	public void setId(Long id) {
@@ -80,6 +70,14 @@ public class Postagem {
 		this.texto = texto;
 	}
 
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
 	public Tema getTema() {
 		return tema;
 	}
@@ -95,4 +93,7 @@ public class Postagem {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+
+	
 }
